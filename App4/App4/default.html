@@ -1,15 +1,23 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title>Webify</title>
 	<script src="js/jquery-2.1.1.min.js"></script>	
 	<script src="js/fabric.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 	<canvas id='c1' width="1280" height="720" style="border:1px solid #000000"></canvas>
-	<button onclick="addcircle(20)">+</button>
+	<button onclick="addcircle(20)">o</button>
+    <button onclick="addrect()">[]</button>
     <button onclick="addimage('images/Untitled.png')">+</button>
     <button onclick="addtext('hello world')">+</button>
 	<button onclick="draw()">draw</button>
+    <button onclick="preview()">preview</button>
+    <input class="borderRadius" id="borderRadiusX" style="width:20px;"/>
+    <input class="borderRadius" id="borderRadiusY" style="width:20px;"/>
+    <button class="borderRadius" id="appRadius" onclick="apply()">apply</button>
 	<script src="js/main.js"></script>
+    <div id="previewWindow">preview goes here</div>
 </body>
 </html>

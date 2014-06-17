@@ -1,0 +1,16 @@
+﻿body {
+    z-index:1;
+}
+#previewWindow {
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:2;
+    background:white;
+    top:0px;
+    left:0px;
+    display:none;
+}
+.borderRadius{
+    display:none;
+}

@@ -10,10 +10,12 @@ canvas.selectionLineWidth = 1;
 canvas.on('mouse:down', function (options) {
     if (options.target) {
         t = options.target;
-        $('#borderRadiusX').val(t.rx);
-        $('#borderRadiusY').val(t.ry);
-        if (t.type = 'rect') {
+        $('#borderRadiusX').val(parseInt(t.rx * t.getWidth()/100));
+        $('#borderRadiusY').val(parseInt(t.ry * t.getHeight()/100));
+        if (t.type == 'rect') {
             $('.borderRadius').show();
+        } else {
+            $('.borderRadius').hide();
         }
     }
 });
@@ -56,7 +58,7 @@ function apply() {
         ary = $('#borderRadiusY').val();
         arx = parseInt(arx);
         ary = parseInt(ary);
-        a.set({ rx: arx, ry: ary });
+        a.set({ rx: arx/a.getWidth()*100, ry: ary/a.getHeight()*100 });
         canvas.renderAll();
     }
 }

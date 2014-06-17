@@ -1,4 +1,5 @@
 var canvas = new fabric.Canvas('c1');
+canvas.isDrawingMode = false;
 canvas.on('mouse:down', function(options) {
   if (options.target) {
     console.log('an object was clicked! ', options.target.type);
@@ -20,4 +21,7 @@ function addtext(t) {
         fontFamily: 'Comic Sans'
     });
     canvas.add(comicSansText);
+}
+function draw() {
+canvas.isDrawingMode = !canvas.isDrawingMode;  
 }

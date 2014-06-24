@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>webify</title>
+
+    <!-- WinJS references -->
+  
+    <!-- webify references -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <script src="js/ZeroClipboard.js"></script>
+    <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src='js/spectrum.js'></script>
+    <link rel='stylesheet' href='css/spectrum.css' />
+    <link href="css/default.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/dragresize_commented.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/keyevents.js"></script>
+    <script src="js/main.js"></script>
+    <style type="text/css">
+.window{
+}
+h1{
+margin:0;
+}
+.menu{
+border:1px solid black;
+position:fixed;
+}
+/* Required CSS classes: must be included in all pages using this script */
+
+/* Apply the element you want to drag/resize */
+.drsElement {
+ position: absolute;
+ border: 1px solid #333;
+}
+.menuli button{
+    background:white;
+    font-size:10px;
+    border:none;
+}
+        
+.menuli li{
+    width:150px;
+    font-size:10px;
+    padding:0px;
+    cursor:pointer;
+    border:1px solid #CCC;
+}
+.menuli li:hover{
+    width:150px;
+    font-size:11px;
+    color:black;
+    border:1px solid #CCC;
+}
+
+.menuli{
+    height:100px;
+    width:170px;
+    overflow-y:scroll;
+    padding:0px;
+}
+
+.menuli2 button{
+    background:white;
+    font-size:10px;
+    border:none;
+    height:15px;
+}
+#menuWrapper {
+    color:black;
+        }        
+.menuli2 li{
+    background:transparent;
+    width:150px;
+    font-size:10px;
+    padding:0px;
+    height:20px;
+    border:1px solid #CCC;
+}
+.menuli2 li:hover{
+    background:#CCC;
+}
+
+        
+.menubut {
+cursor:pointer;
+        }
+.menuli2{
+    width:167px;
+    overflow-y:scroll;
+    padding:0px;
+}
+        
+.menuli2 input {
+    font-size:8px;
+    padding:0px;
+    height:15px;
+}
+
+/*
+ The main mouse handle that moves the whole element.
+ You can apply to the same tag as drsElement if you want.
+*/
+.drsMoveHandle {
+ height: 20px;
+ margin-top:-20px;
+ background-color: rgba(128, 128, 128,0.0);
+ cursor: move;
+}
+
+/*
+ The DragResize object name is automatically applied to all generated
+ corner resize handles, as well as one of the individual classes below.
+*/
+.dragresize {
+ position: absolute;
+ width: 5px;
+ height: 5px;
+ font-size: 1px;
+ background: #EEE;
+ border: 1px solid #333;
+}
+
+/*
+ Individual corner classes - required for resize support.
+ These are based on the object name plus the handle ID.
+*/
+.dragresize-tl {
+ top: -8px;
+ left: -8px;
+ cursor: nw-resize;
+}
+.dragresize-tm {
+ top: -8px;
+ left: 50%;
+ margin-left: -4px;
+ cursor: n-resize;
+}
+.dragresize-tr {
+ top: -8px;
+ right: -8px;
+ cursor: ne-resize;
+}
+
+.dragresize-ml {
+ top: 50%;
+ margin-top: -4px;
+ left: -8px;
+ cursor: w-resize;
+}
+.dragresize-mr {
+ top: 50%;
+ margin-top: -4px;
+ right: -8px;
+ cursor: e-resize;
+}
+
+.dragresize-bl {
+ bottom: -8px;
+ left: -8px;
+ cursor: sw-resize;
+}
+.dragresize-bm {
+ bottom: -8px;
+ left: 50%;
+ margin-left: -4px;
+ cursor: s-resize;
+}
+.dragresize-br {
+ bottom: -8px;
+ right: -8px;
+ cursor: se-resize;
+}
+
+</style>
+
+<script type="text/javascript">
+    //<![CDATA[
+
+    // Using DragResize is simple!
+    // You first declare a new DragResize() object, passing its own name and an object
+    // whose keys constitute optional parameters/settings:
+
+    var dragresize = new DragResize('dragresize',
+     { minLeft: -1000, minTop: -1000 });
+
+    // Optional settings/properties of the DragResize object are:
+    //  enabled: Toggle whether the object is active.
+    //  handles[]: An array of drag handles to use (see the .JS file).
+    //  minWidth, minHeight: Minimum size to which elements are resized (in pixels).
+    //  minLeft, maxLeft, minTop, maxTop: Bounding box (in pixels).
+
+    // Next, you must define two functions, isElement and isHandle. These are passed
+    // a given DOM element, and must "return true" if the element in question is a
+    // draggable element or draggable handle. Here, I'm checking for the CSS classname
+    // of the elements, but you have have any combination of conditions you like:
+
+    dragresize.isElement = function (elm) {
+        if (elm.className && elm.className.indexOf('drsElement') > -1) return true;
+    };
+    dragresize.isHandle = function (elm) {
+        if (elm.className && elm.className.indexOf('drsMoveHandle') > -1) return true;
+    };
+
+    // You can define optional functions that are called as elements are dragged/resized.
+    // Some are passed true if the source event was a resize, or false if it's a drag.
+    // The focus/blur events are called as handles are added/removed from an object,
+    // and the others are called as users drag, move and release the object's handles.
+    // You might use these to examine the properties of the DragResize object to sync
+    // other page elements, etc.
+
+    dragresize.ondragfocus = function () { };
+    dragresize.ondragstart = function (isResize) { };
+    dragresize.ondragmove = function (isResize) { };
+    dragresize.ondragend = function (isResize) { };
+    dragresize.ondragblur = function () { };
+    // Finally, you must apply() your DragResize object to a DOM node; all children of this
+    // node will then be made draggable. Here, I'm applying to the entire document.
+    dragresize.apply(document);
+    //function for keyboard shortcuts
+
+
+    //]]>
+</script>
+
+</head>
+<body onkeydown="keycheck(event)">
+
+<div id="menuWrapper"style="float:left;width:170px">
+<div id='add' style="display:block;" >Add Shapes<a onclick="$('#hideWrapper').toggle();">-</a></div>
+<div id="hideWrapper">
+<div id='menuItems' >
+	<div class="menuadd" id="addRect"  onclick="changeText(1)"></div>
+	<div class="menuadd" id="addCircle"onclick="changeText(2)"></div>
+	<div class="menuadd" id="addPlgm"  onclick="changeText(3)"></div>
+	<div class="menuadd" id="addTri1"  onclick="changeText(4)"></div>
+	<div class="menuadd" id="addTri2"  onclick="changeText(5)"></div>
+	<div class="menuadd" id="addTri3"  onclick="changeText(6)"></div>
+	<div class="menuadd" id="addTri4"  onclick="changeText(7)"></div>
+</div>
+    
+<ul id="curDiv" class="menuli">
+<li id="Li6" onclick="addGrid(1)">X-helper</li>
+<li id="Li7" onclick="addGrid(2)">Y-helper</li>
+
+<li id="addtext" onclick="addText(1)">Heading 1</li>
+<li id="Li3" onclick="addText(2)">Heading 2</li>
+<li id="Li8" onclick="addText(3)">Heading 3</li>
+<li id="addButton" onclick="addButtonw(1)">Button</li>
+<li id="Button1" onclick="addButtonw(2)">shadow Button</li>
+<li id="Button2" onclick="addButtonw(3)">DropDown1</li>
+<li id="Button3" onclick="addButtonw(4)">DropDown2</li>
+<li id="Button4" onclick="addButtonw(5)">tooltip</li>
+<li id="Li1" >image<input id="imgInp" style="width:auto" type="file"></li>
+</ul>
+
+<ul id='curDiv' class="menuli2" style='z-index:9999;'>
+<li >w: <input oninput='updateX()' id='cdw'> h:<input oninput='updateX()' id='cdh'></li>
+<li >x:  <input id='cdx'> y:<input id='cdy'><button onclick='updateX()'>apply</button></li>
+<li >Skew: <input oninput='changeSkew()' id='cdsX'><input oninput='changeSkew()' id='cdsY' ><button onclick="changeSkew()">apply</button></li>
+<li>background: <input  id="editColor" /></li>
+<!--<li id="Li2" onmouseover="previewhover()" onmouseout="stoppreview()">hover Preview</li>-->
+<li id="onhover" onclick="onhover()" style="position:absolute">onhover</li>
+<li id="sethover" onclick="sethover()" style="position:absolute;display:none;" >set hover</li><li></li>
+<li class="menubut" onclick='genHTML()'>preview</li>
+
+<li id="Li2" class="menubut" onclick="b2f()">Push Front</li>
+<li id="Li4" class="menubut" onclick="b2b()">Push Back</li>
+<li id="Li5" class="menubut" onclick="del()">Delete</li>
+<li id="bAttach" class="menubut" onclick="attstart()">Attach</li>
+<li id="copyHTML" class="menubut" onclick="copyHTML()" >copy html</li>
+    
+</ul>
+    </div>
+   </div> <!--
+<div id="textty" style="display:none">
+<input id="text" style="width:100px;" onchange="settex  t()"/><button onclick="settext()">set text</button>
+</div>-->
+    
+    <div id="main" style="position:absolute;top:0px;"></div>
+       <div id="prev"></div>
+        <div id="mousePos"></div>
+        <button id="copyback" onclick="copyback()" style="display:none;" >back</button>
+        <textarea id='html' style="display:none;"></textarea>
+    
+        <div id="backButton" onclick="$('#prev').hide(),$('#backButton').hide();$('#main').show()"></div>
+<style>
+    h1,h2,h3,h5 {
+        margin:0px;
+        padding:0px;
+    }
+    #colorSelector div {
+    position: relative;
+    top: 4px;
+    left: 4px;
+    width: 48px;
+    height: 15px;
+    }
+    #prevw {
+    position:absolute;
+    }
+    #prev {
+        overflow:scroll;
+    top:0px;
+    left:0px;
+    position:fixed;
+    z-index:99999;
+    display:none;
+    height:100%;
+    width:100%;
+    background-color:white;
+    }
+    #blah {
+        width:100%;
+    }
+    
+    #blahWrapper {
+        width:150px;
+        position:absolute;
+        left:500px;
+    }
+    #backButton {
+    top:0px;
+    left:0px;
+    background-color:gray;
+    width:50px;
+    height:20px;
+    position:fixed;
+    z-index:99999;
+    display:none;
+    }
+    .awesome {
+    height:15px;
+    border:none;
+    padding:0px;
+    }
+</style>
+
+<script>
+
+    im = 1;
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                d = document.createElement('DIV');
+                d2 = document.createElement('DIV');
+                d.id = 'imgW' + im;
+                d2.id = 'imgC' + im;
+                img = document.createElement('IMG');
+                img.id = 'img' + im;
+                img.style.width='100%';
+                d2.appendChild(img);
+                d.style.zIndex = appzIndex+100;
+                d.appendChild(d2);
+                
+                document.getElementById('main').appendChild(d);
+                $('#'+img.id).attr('src', e.target.result);
+                $('#' + d.id).width(150).offset({left:300});
+                //d.style.overflow = 'hidden';
+                $('#' + d.id).draggable();
+                //$('#' + d2.id).draggable();
+                $('#' + d.id).resizable({aspectRatio:true});
+
+                im++;
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+    function pmod(s) {
+        if (s < 0) {
+            return (-s);
+        } else return s;
+    }
+    $("#menuWrapper").draggable();
+    $("#snapper").draggable({
+        drag: function (event, ui) {
+            var snapTolerance = 20;
+            var topRemainder = ui.position.top;
+            var leftRemainder = ui.position.left;
+
+            console.log(topRemainder, leftRemainder);
+            //if (topRemainder <= snapTolerance) {
+            //    ui.position.top = ui.position.top - topRemainder;
+            //}
+
+            if (pmod(leftRemainder-420) <= snapTolerance) {
+                ui.position.left = 420;
+            }
+        }
+    });
+
+    $("#editColor").spectrum({
+        color: "#f00",
+        replacerClassName: 'awesome',
+        showInput: true,
+        showAlpha: true,
+        //showPalette: true,
+        showInitial: true,
+        showInput: true,
+        move: function (color) {
+            //console.log(color.toRgbString());
+            c = color.toRgbString(); // #ff0000
+            changeColor(c);
+        },
+        beforeShow: function(color) {
+            //console.log('choosen')
+        },
+    });
+    din = document.getElementsByTagName('input');
+    for (i = 0; i < din.length; i++) {
+        din[i].onfocus = function () { istyping = true; console.log('you are typing') };
+        din[i].onblur  = function () { istyping = false; console.log('you stopped typing') };
+    }
+</script></body></html>
